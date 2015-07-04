@@ -36,7 +36,7 @@ init([Port,Listeners]) ->
                  period => 1},      
  
     ServerSpecs = #{id => chat_server,
-                     start => {chat_server, start_link, [Port]},
+                     start => {chat_server, start_link, []},
                      restart => permanent,
                      shutdown => brutal_kill,
                      type => worker,

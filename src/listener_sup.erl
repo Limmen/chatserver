@@ -2,6 +2,7 @@
 
 -behaviour(supervisor).
 
+-define(TCP_OPTIONS,[list, {packet, 0}, {active, false}, {reuseaddr, true}]).
 
 
 %API
@@ -25,11 +26,14 @@ start_link(Port, Listeners) ->
 
 init([Port,Listeners]) ->
     io:format("supervisor called listener_sup init func. ~n"),
+    
+    {ok, ServerSocket} = gen_tcp:listen(Port, ?TCP_OPTIONS),
+
     SupFlags = #{strategy => one_for_all,   
                 intensity => 0, 
                 period => 1},       
     Create_workers = fun() -> {make_ref(),
-                        {listener, spawn_socket, [Port]},
+                        {listener, spawn_socket, [ServerSocket]},
                         transient, brutal_kill, worker, [listener]}
                      end,
 
