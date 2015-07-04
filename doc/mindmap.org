@@ -1,0 +1,93 @@
+* Map over the system.
+
+#+begin_src ditaa :file mindmap.png
+                                           +----------------------------------------------------------------------------------------------+
+                                           |                   Chat application in OTP erlang. (For educational purpose)    cYEL           |
+                                           +----------------------------------------------------------------------------------------------+
+                                           |                                                                                              |
+                                           |    o Command-line chat application that should be concurrent and robust using erlangs        |
+                                           |      OTP framework.                                                                          |
+                                           |                                                                                              |
+                                           |    o This is my first OTP application ever, inspired after read "Learn you some erlang       |
+                                           |      for great good".                                                                        |
+                                           |                                                                                              |
+                                           |                                                                                              |
+                                           |    o This mindmap is just so for me too understand the OTP-way of structuring applications   |
+                                           |      and the mindset.                                                                        |
+                                           |                                                                                              |
+                                           |    o This mindmap is done with ascii-art + ditaa inside emacs org-mode.                      |
+                                           |                                                                                              |
+                                           |                                                                                              |
+                                           +----------------------------------------------------------------------------------------------+
+                                                                                                                         
+                                                                                                                         
+                                                                                                                         
+                                                                                                                         
+                                                                                                                         
+                                                                                                                         
+                                                                                                                         
+               +------------------+                                                                                      
+               |Application  cPNK |                                                       +-------------------------------+
+               +------------------+                                                       |                               |
+               |InputArgs: Port,  |              Start application                        |  Root supervisor  cGRE        |
+               | listeners        +-----------------------------------------------------> +-------------------------------+
+               |                  |                                                       |  InputArgs: Port, listeners   |           Supervise
+               +------------------+                              Supervise                |                               +------------------------------------|
+                                                        +---------------------------------+                               |                                    |
+                                                        |                                 |                               |                                    |
+                                                        |                                 +-------------------------------+                                    |
+                                                        v                                                                                                      |
+                                           +----------------------+                                                                                            v
+                                           |   cRED               |                                                                                 +--------------------------+
+                                           | Server               |                                                                                 |                          |
+                           | broadcast     +----------------------+                                                                                 | Client supervisor        |
+                           +---------------+                      |                                                                                 |               cGRE       |
+                           |               | InputArgs: []        |                                                                                 +--------------------------+
+                           |               | broadcast()          |                                                                 Supervise       |                          |
+                           |               | registerClient()     |                                                                +----------------+  InputArgs: Port,        |
+                           |               | deRegClient()        |                                                                |                |   listeners              |
+                           |               +----------------------+                                                                |                |                          |
+                           |                            ^                                                                          |                |                          |
+                           |                            |                                                                          |                +--------------------------+
+                           |                            |                                                                          |                   
+                           |                            |                                                                          |                   
+                           |                            |                                                                          v                   
+                           v                            |                                                                  +----------------------------------+
+                      +---------------------+           |                                                                  | listener  cRED                   |
+                      |  Client   cBLU      |           |                                                                  +----------------------------------+-
+                      +---------------------+           |                  connects                                        |                                  | 
+                      | InputArgs:port      +-----------+----------------------------------------------------------------->|  InputArgs: Port                 | 
+                      |                     |           |                                                                  |                                  | 
+                      | connect()           |           |                                                                  | spawnClientHandler();            | 
+                      | send()              |           |                                                                  |                                  | 
+                      |                     |           |                                                     Starts       |                                  | 
+                      |                     |           |                                                   +--------------+                                  |
+                      +---------+-----------+           |                                                   |              |                                  |
+                                |                       |                                                   |              +----------------------------------+
+                                |                       |                                                   |                              
+                                |                       |                                                   |                              
+                                |                       |                                                   |                              
+                                |                       |                                                   v                              
+                                |                       |                                           +---------------------+                
+                                |                       |                                           | Client handler cBLU |                
+                                |                       |  broadcast,register,deReg                 +---------------------+                
+                                |                       +-------------------------------------------+ InputArgs: Socket   |                
+                                |                                                                   |                     |                
+                                |                                                                   | regClient()         |                
+                                |                                                                   | receieve()          |                
+                                |                                                                   | broadcast()         |                
+                                |                          send                                     | deRegClient()       |                
+                                +------------------------------------------------------------------>|                     |                
+                                                                                                    +---------------------+
+
+
+
+
+
+
+
+#+end_src
+
+#+RESULTS:
+[[file:mindmap.png]]
+
