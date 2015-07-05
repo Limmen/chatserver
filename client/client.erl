@@ -2,9 +2,9 @@
 -compile(export_all).
 -define(TCP_OPTIONS,[list, {packet, 0}, {active, false}]).
 
-connect(Port) ->
+connect() ->
     Server = "localhost", % to make it runnable on one machine
-    {ok, ServerSocket} = gen_tcp:connect(Server, Port, ?TCP_OPTIONS),
+    {ok, ServerSocket} = gen_tcp:connect(Server, 2000, ?TCP_OPTIONS),
     register(rc, spawn_link(fun()-> recv(ServerSocket) end)),
     chat(ServerSocket).
 
