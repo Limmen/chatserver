@@ -16,7 +16,7 @@
 %%====================================================================
 
 start(_StartType, Args) ->
-    io:format("application is starting up. ~n"),
+    io:format("Chat-server starting"),
     'chat_sup':start_link(Args).
 
 %%--------------------------------------------------------------------

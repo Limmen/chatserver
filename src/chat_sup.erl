@@ -20,7 +20,6 @@
 %%====================================================================
 
 start_link(Args) ->
-    io:format("chat_sup is starting up. ~n"),
     supervisor:start_link({local, ?SERVER}, ?MODULE, Args).
 
 %%====================================================================
@@ -29,9 +28,8 @@ start_link(Args) ->
 
 %% Child :: {Id,StartFunc,Restart,Shutdown,Type,Modules}
 init([Port,Listeners]) ->
-    io:format("supervisor called chat_sup init func. ~n"),
 
-    SupFlags = #{strategy => one_for_all,   
+    SupFlags = #{strategy => one_for_one,   
                  intensity => 0, 
                  period => 1},      
  

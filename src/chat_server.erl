@@ -22,7 +22,6 @@
 %%====================================================================
 
 start_link() ->
-    io:format("Chatserver is starting up ~n"),
     process_flag(trap_exit, true), %% TODOOOOOOOOOOO
     gen_server:start_link({local, chat_server}, chat_server, [], []).
 
@@ -34,24 +33,22 @@ stop() ->
 %%====================================================================
 
 init([]) ->
-    io:format("Chatservers init func was called by gen_server ~n"),
     %%Empty list cause 0 clients.
     {ok, #state{clients=[]}}.
     
 handle_call({reg_client,ClientSocket,UserName},{Pid, _},State) ->
-    io:format("handle, call inside chat_server ~n"),
     io:format("Client ~p connected from ~p~n", [UserName, Pid]),
     link(Pid),
     Client = #client{pid=Pid, name=UserName, socket=ClientSocket},
     NewState = State#state{clients=[Client|State#state.clients]},
-    broadcast(NewState#state.clients, UserName ++ " has joined\n"),
+    broadcast(NewState#state.clients,"<Server>" ++ UserName ++ " has joined\n"),
     {reply, ok, NewState};
 
 handle_call({remove_client,_,UserName},{Pid, _},State) ->
     io:format(UserName ++ "leaving"),
     Clients = [Client || Client <- State#state.clients, Client#client.pid /= Pid],
     NewState = State#state{clients=Clients},
-    broadcast(NewState#state.clients, UserName ++ " has left\n"),
+    broadcast(NewState#state.clients,"<Server>" ++ UserName ++ " has left\n"),
     {reply, ok, NewState}.
 
 %% Remove client from the current list
@@ -81,6 +78,7 @@ handle_cast(_Other, State) ->
 
 % Handle clients dying
 handle_info({'EXIT', From, _}, State) ->
+    io:format("server got EXIT signal from: " ++ From),
     Msg = find_client(State#state.clients, From) ++ " has left",
     broadcast(State#state.clients, Msg),
     NewState = [Cli || Cli <- State#state.clients, Cli /= From],
@@ -127,7 +125,7 @@ find_client(Clients, Pid) ->
 
 get_active_clients(Clients) ->
   CliNames = [Cli#client.name ++ "\n" || Cli <- Clients],
-  Msgs = ["Clients currently active:",
+  Msgs = ["<Server> Clients currently active:",
           "---",
           CliNames,
           "---\n"],

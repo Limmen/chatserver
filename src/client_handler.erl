@@ -9,7 +9,7 @@
 %%====================================================================
 clientSetup(ClientSocket) ->
     io:format("setting upp client!! ~n"),
-    gen_tcp:send(ClientSocket, <<"Enter username> \r\n">>),
+    gen_tcp:send(ClientSocket, <<"<Server> Enter username \r\n">>),
     io:format("ClientHandler waiting for username"),
     case gen_tcp:recv(ClientSocket, 0) of
         {ok, Raw_msg} ->
@@ -40,5 +40,6 @@ chat(ClientSocket, UserName) ->
             end,
             chat(ClientSocket, UserName);
         {error, closed} ->
-            ok
+            io:format("Broadcasting that client left ~n"),
+            chat_server:broadcast_client_left(ClientSocket,UserName)
     end.
