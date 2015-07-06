@@ -2,7 +2,7 @@
 
 -behaviour(supervisor).
 
--define(TCP_OPTIONS,[list, {packet, 0}, {active, false}, {reuseaddr, true}]).
+-define(TCP_OPTIONS,[binary, {packet, 0}, {active, false}, {reuseaddr, true}]).
 
 
 %API
