@@ -30,8 +30,8 @@ start_link(Args) ->
 init([Port,Listeners]) ->
 
     SupFlags = #{strategy => one_for_one,   
-                 intensity => 0, 
-                 period => 1},      
+                 intensity => 1, 
+                 period => 3},      
  
     ServerSpecs = #{id => chat_server,
                      start => {chat_server, start_link, []},

@@ -28,8 +28,8 @@ init([Port,Listeners]) ->
     {ok, ServerSocket} = gen_tcp:listen(Port, ?TCP_OPTIONS),
 
     SupFlags = #{strategy => one_for_one,   
-                intensity => 0, 
-                period => 1},       
+                intensity => 1, 
+                period => 3},       
     Create_workers = fun() -> {make_ref(),
                         {listener, spawn_socket, [ServerSocket]},
                         permanent, brutal_kill, worker, [listener]}
