@@ -11,7 +11,6 @@ clientSetup(ClientSocket) ->
     gen_tcp:send(ClientSocket, <<"<Server> Enter username \r\n">>),
     case gen_tcp:recv(ClientSocket, 0) of
         {ok, Raw_msg} ->
-            io:format("ClientHandler received username ~n"),
             UserName = binary:bin_to_list(Raw_msg),
             chat_server:reg_client(ClientSocket, UserName),
             chat(ClientSocket, UserName);

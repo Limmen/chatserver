@@ -98,7 +98,6 @@ code_change(_OldVsn, State, _Extra) ->
 
 
 reg_client(ClientSocket, UserName) ->
-    io:format("sending reg-client call to gen_server ~n"),
     gen_server:call(?MODULE, {reg_client, ClientSocket, UserName}).
 
 broadcast(Msg) ->

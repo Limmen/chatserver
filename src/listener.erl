@@ -19,5 +19,6 @@ spawn_socket(ServerSocket)->
 
 accept(ServerSocket) ->
     {ok, ClientSocket} = gen_tcp:accept(ServerSocket),
+    io:format("Client connected! ~n"),
     spawn(fun() -> client_handler:clientSetup(ClientSocket) end),
     accept(ServerSocket).
