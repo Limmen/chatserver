@@ -1,15 +1,4 @@
 #include "MainWindow.h"
-#include "text_entry.h"
-#include <QSizePolicy>
-#include <QMenu>
-#include <QMenuBar>
-#include <QAction>
-#include <QKeyEvent>
-#include <QTime>
-#include <QEventLoop>
-#include <QString>
-#include <QCoreApplication>
-#include <QMessageBox>
 MainWindow *main_gui;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)

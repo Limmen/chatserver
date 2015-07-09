@@ -6,7 +6,16 @@
 #include "ChatWindow.h"
 #include "ConnectWindow.h"
 #include "DisconnectedWindow.h"
+#include "text_entry.h"
 #include <QAction>
+#include <QSizePolicy>
+#include <QMenu>
+#include <QMenuBar>
+#include <QTime>
+#include <QEventLoop>
+#include <QString>
+#include <QCoreApplication>
+#include <QMessageBox>
 class MainWindow : public QMainWindow
 {
     Q_OBJECT

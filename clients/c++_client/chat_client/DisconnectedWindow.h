@@ -6,7 +6,10 @@
 #include <QPushButton>
 #include <QTcpSocket>
 #include <QGridLayout>
-#include <QTextEdit> 
+#include <QTextEdit>
+#include <QLabel>
+#include <QScrollArea>
+#include <QPushButton>
 #include "text_entry.h"
 
 class DisconnectedWindow : public QScrollArea

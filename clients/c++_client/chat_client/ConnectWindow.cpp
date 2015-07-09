@@ -1,10 +1,4 @@
-#include <QLabel>
-#include <QMenu>
-#include <QMenuBar>
-#include <QScrollArea>
-#include <QPushButton>
 #include "ConnectWindow.h"
-#include "text_entry.h"
 
 ConnectWindow *connect_window;
 
@@ -19,13 +13,10 @@ ConnectWindow::ConnectWindow(QScrollArea *parent) : QScrollArea(parent)
     main_container = new QGridLayout(main_widget);
     main_container->setVerticalSpacing(10);
     main_container->setHorizontalSpacing(0);
-    
-    //    txt = new text_entry;
-    
+        
     this->setWidget(main_widget);
     this->setWidgetResizable(true);
 
-    //    QWidget *host_widget = new QWidget;
     QLabel *title = new QLabel();
     title->setText("<font size= '4' color='black'> <b>Connect to a running chatserver </b></font>");
      title->setMaximumHeight(30);

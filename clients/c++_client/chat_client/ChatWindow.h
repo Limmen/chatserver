@@ -1,6 +1,11 @@
 #ifndef CHATWINDOW_H
 #define CHATWINDOW_H
 
+#include <QLabel>
+#include <QMenu>
+#include <QMenuBar>
+#include <QScrollArea>
+#include <QString>
 #include <QWidget>
 #include <QScrollArea>
 #include <QTcpSocket>

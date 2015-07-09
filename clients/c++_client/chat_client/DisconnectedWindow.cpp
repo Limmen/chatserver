@@ -1,8 +1,4 @@
-#include <QLabel>
-#include <QScrollArea>
-#include <QPushButton>
 #include "DisconnectedWindow.h"
-
 
 DisconnectedWindow::DisconnectedWindow(QScrollArea *parent) : QScrollArea(parent)
 {

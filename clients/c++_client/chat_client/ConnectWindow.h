@@ -1,6 +1,11 @@
 #ifndef CONNECTWINDOW_H
 #define CONNECTWINDOW_H
 
+#include <QLabel>
+#include <QMenu>
+#include <QMenuBar>
+#include <QScrollArea>
+#include <QPushButton>
 #include <QWidget>
 #include <QScrollArea>
 #include <QPushButton>
