@@ -7,7 +7,7 @@ TARGET = c3
 INCLUDEPATH += .
 
 # Input
-HEADERS += MainWindow.h text_entry.h
-SOURCES += main.cpp MainWindow.cpp
+HEADERS += MainWindow.h ChatWindow.h text_entry.h ConnectWindow.h DisconnectedWindow.h
+SOURCES += main.cpp MainWindow.cpp ChatWindow.cpp ConnectWindow.cpp DisconnectedWindow.cpp
 QT += widgets
 QT += network

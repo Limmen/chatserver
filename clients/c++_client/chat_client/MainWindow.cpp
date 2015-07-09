@@ -1,120 +1,103 @@
 #include "MainWindow.h"
-#include <iostream>
-// We'll need some regular expression magic in this code:
-#include <QRegExp>
-#include <QPushButton>
-#include <QVBoxLayout>
-#include <QTextEdit>
-#include <QLabel>
-#include <QScrollArea>
-#include <QWidget>
+#include "text_entry.h"
+#include <QSizePolicy>
 #include <QMenu>
 #include <QMenuBar>
-#include "text_entry.h"
-
+#include <QAction>
+#include <QKeyEvent>
+#include <QTime>
+#include <QEventLoop>
+#include <QString>
+#include <QCoreApplication>
+#include <QMessageBox>
 MainWindow *main_gui;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
 
-    main_gui = this;    
-QWidget *centralWidget = new QWidget(this);
-this->setCentralWidget(centralWidget);
+    main_gui = this;
 
-QVBoxLayout *container = new QVBoxLayout(centralWidget);
-container->setSpacing(1);
-
-
-QWidget *upper_widget = new QWidget;
-QWidget *lower_widget = new QWidget;
-QScrollArea *scroll = new QScrollArea;  
-upper_container = new QVBoxLayout(upper_widget);
-upper_container->setSpacing(1);
-
-QVBoxLayout *lower_container = new QVBoxLayout(lower_widget);
-lower_container->setSpacing(1);
-lower_container->addWidget(upper_widget);
-
-scroll->setWidget(lower_widget);
-scroll->setWidgetResizable(true);
-
-container->addWidget(scroll);
-
-// MyTextEdit tt;  
-txt = new text_entry;
-
-
-//upper_container->addWidget(lbl);
-lower_container->addWidget(txt);
-
-
- QAction *help = new QAction("&Help", this);
- QAction *about = new QAction("&About", this);
-
- QMenu *file;
- file = menuBar()->addMenu("&Options");
- file->addAction(help);
- file->addAction(about);
+    connectFrame();
     
-    socket = new QTcpSocket(this);
+    QAction *help = new QAction("&Help", this);
+    QAction *about = new QAction("&About", this);
+    QMenu *main_menu;
+    main_menu = menuBar()->addMenu("&Options");
+    main_menu->addAction(help);
+    main_menu->addAction(about);
 
-    connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
-    connect(socket, SIGNAL(connected()), this, SLOT(connected()));
+    //    connect(help, SIGNAL(triggered()), qApp, SLOT(helpBox()));
+    //    connect(about, SIGNAL(triggered()), qApp, SLOT(aboutBox()));
+		
 
-    socket->connectToHost("localhost", 2000);
-    qDebug("Socket connected");
 }
 
-void MainWindow::readyRead()
+ void ConnectWindow::startChat(){
+            main_gui->chat = new ChatWindow;
+            QString host = host_edit->toPlainText();
+            QString port_string = port_edit->toPlainText();
+            int port = port_string.toInt();
+            main_gui->chat->test_connection(host, port);
+            host_edit->setText("Connecting..");
+            port_edit->setText("Connecting..");
+            main_gui->delay();
+            if(main_gui->chat->socket_status == 3){
+                main_gui->chatFrame();
+            }
+            else{
+                host_edit->setText("<font color='red'> Could'nt connect </font> <font color='black'> </font>");
+                port_edit->setText("<font color='red'> Could'nt connect </font> <font color='black'> </font>");
+            }
+ }            
+
+
+void MainWindow::connectFrame(){
+    connect = new ConnectWindow;
+    QWidget *centralWidget = new QWidget(this);
+    this->setCentralWidget(centralWidget);
+    QVBoxLayout *container = new QVBoxLayout(centralWidget);
+    container->setSpacing(1);
+    container->addWidget(connect);    
+}
+
+void MainWindow::chatFrame(){
+    QWidget *centralWidget = new QWidget(main_gui);
+    main_gui->setCentralWidget(centralWidget);
+    QVBoxLayout *container = new QVBoxLayout(centralWidget);
+    container->setSpacing(1);
+    container->addWidget(main_gui->chat);
+}
+void MainWindow::disconnectFrame(){
+    disconnect = new DisconnectedWindow;
+    QWidget *centralWidget = new QWidget(this);
+    this->setCentralWidget(centralWidget);
+    QVBoxLayout *container = new QVBoxLayout(centralWidget);
+    container->setSpacing(1);
+    container->addWidget(disconnect);    
+}
+void MainWindow::delay()
 {
-    std::cout << "Ready read" << std::endl;
-    // We'll loop over every (complete) line of text that the server has sent us:
-    while(socket->canReadLine())
-    {
-        // Here's the line the of text the server sent us (we use UTF-8 so
-        // that non-English speakers can chat in their native language)
-        QString line = QString::fromUtf8(socket->readLine()).trimmed();
-        qDebug() << "Debug Message";
-        qDebug() << line;
-        
-        QLabel *entry = new QLabel();
-        entry->setText(line);
-        upper_container->addWidget(entry);
-    }
-}
-void text_entry::keyPressEvent(QKeyEvent *event)
-{
-    if (event->key() == Qt::Key_Return)
-        {
-            qDebug("Enter pressed in textedit");
-            //main_gui->connected();
-            QString msg = main_gui->txt->toPlainText();
-            main_gui->socket->write(msg.toUtf8());
-            main_gui->txt->setText("");
-        }
-    else
-        {
-            QTextEdit::keyPressEvent(event);
-        }
+    QTime dieTime= QTime::currentTime().addSecs(1);
+    while( QTime::currentTime() < dieTime )
+    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);    
+}            
+
+void ChatWindow::disconnectFrame(){
+    main_gui->disconnectFrame();
 }
 
-
-void MainWindow::connected()
-{
-    // Flip over to the chat page:
-    //    stackedWidget->setCurrentWidget(chatPage);
-    qDebug("socket connected");
-    // And send our username to the chat server.
-    //    socket->write(QString("hi").toUtf8());
+void DisconnectedWindow::new_connection(){
+    main_gui->connectFrame();
 }
-
-void MainWindow::keyPressEvent(QKeyEvent *e)
-{
-    if (e->key() == Qt::Key_Return) {  
-        std::cout << "KEy pressed ! " << std::endl;
-        //        QString msg = txt->toPlainText();
-        //        socket->write(msg.toUtf8());
-        //        txt->setText("");
-    } 
+void MainWindow::helpBox(){
+    QMessageBox *msgBox  = new QMessageBox();
+    msgBox->setWindowTitle("Help");
+    msgBox->setText("Help....");
+    msgBox->show();
 }
-
+void MainWindow::aboutBox(){
+    QMessageBox *msgBox  = new QMessageBox();
+    msgBox->setWindowTitle("About");
+    msgBox->setText("About");
+    msgBox->show();
+}
