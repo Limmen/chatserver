@@ -15,18 +15,34 @@ ChatWindow::ChatWindow(QScrollArea *parent) : QScrollArea(parent)
     chat_window = this;
     
     QWidget *upper_widget = new QWidget;
+    upper_widget->setMinimumHeight(0);
     QWidget *lower_widget = new QWidget;
-    
+    lower_widget->setMinimumHeight(0);
+    upper_widget->setContentsMargins(-1, -1, -1, 0);
+    lower_widget->setContentsMargins(-1, 0, -1, -1);
+
     upper_container = new QVBoxLayout(upper_widget);
-    upper_container->setSpacing(1);
+    upper_container->setSpacing(0);
+    upper_container->setMargin(0);
+    upper_container->setContentsMargins(0,0,0,0);
+
     QVBoxLayout *lower_container = new QVBoxLayout(lower_widget);
-    txt = new text_entry;
+    lower_container->setSpacing(0);
+    lower_container->setMargin(0);
+    lower_container->setContentsMargins(0,0,0,0);
     
-    lower_container->setSpacing(1);
-    lower_container->addWidget(upper_widget);
+    txt = new text_entry;
+    txt->setMaximumHeight(60);
+    QLabel *placeholder = new QLabel();
+    placeholder->setText("");
+
+    lower_container->addWidget(upper_widget, 0, Qt::AlignTop);
     this->setWidget(lower_widget);
     this->setWidgetResizable(true);
-    lower_container->addWidget(txt);
+    this->setContentsMargins(0,0,0,0);
+
+    lower_container->addWidget(txt, 0, Qt::AlignTop);
+    lower_container->addWidget(placeholder, 0, Qt::AlignTop);
 
 }
 
@@ -59,7 +75,7 @@ void ChatWindow::readyRead()
         
             QLabel *entry = new QLabel();
             entry->setText(line);
-            upper_container->addWidget(entry);
+            upper_container->addWidget(entry,  0, Qt::AlignTop);
         }
 }
 

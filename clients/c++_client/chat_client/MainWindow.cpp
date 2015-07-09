@@ -96,13 +96,13 @@ void DisconnectedWindow::new_connection(){
 void MainWindow::helpBox(){
     QMessageBox *msgBox  = new QMessageBox();
     msgBox->setWindowTitle("Help");
-    msgBox->setText("Help....");
+    msgBox->setText("<html> <body> email: kimham@kth.se </body> </html>");
     msgBox->show();
 }
 void MainWindow::aboutBox(){
     QMessageBox *msgBox  = new QMessageBox();
     msgBox->setWindowTitle("About");
-    msgBox->setText("About");
+    msgBox->setText("<html> <body> Chat-client. <br> Connect with IP/hostname + port number to a running chat-server. <br> Use command --active too se a list of active users in the chat. Write 'EXIT' to leave</body> </html>");
     msgBox->show();
 }
 
