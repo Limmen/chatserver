@@ -1,0 +1,6 @@
+# only show the programmed prompt
+-noshell
+
+# for remote access & debugging
+-name chat_server@127.0.0.1
+
