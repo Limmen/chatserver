@@ -16,6 +16,7 @@ int main(int argc, char **argv)
     mainWindow.setWindowTitle("Chat client");
     mainWindow.resize(600,500);
     mainWindow.move(700, 300);
+    
     // This will not return until the last window is closed.
     // This runs the GUI's event loop handling painting and
     // user input and stuff like that.

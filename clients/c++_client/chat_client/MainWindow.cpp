@@ -19,15 +19,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     connectFrame();
     
-    QAction *help = new QAction("&Help", this);
+    help = new QAction("&Help", this);
     QAction *about = new QAction("&About", this);
     QMenu *main_menu;
     main_menu = menuBar()->addMenu("&Options");
     main_menu->addAction(help);
     main_menu->addAction(about);
 
-    //    connect(help, SIGNAL(triggered()), qApp, SLOT(helpBox()));
-    //    connect(about, SIGNAL(triggered()), qApp, SLOT(aboutBox()));
+
+    connect(help, SIGNAL(triggered()), this, SLOT (helpBox()));
+    connect(about, SIGNAL(triggered()), this, SLOT (aboutBox()));
 		
 
 }
@@ -52,12 +53,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 
 void MainWindow::connectFrame(){
-    connect = new ConnectWindow;
+    connect_window = new ConnectWindow;
     QWidget *centralWidget = new QWidget(this);
     this->setCentralWidget(centralWidget);
     QVBoxLayout *container = new QVBoxLayout(centralWidget);
     container->setSpacing(1);
-    container->addWidget(connect);    
+    container->addWidget(connect_window);    
 }
 
 void MainWindow::chatFrame(){
@@ -89,6 +90,9 @@ void ChatWindow::disconnectFrame(){
 void DisconnectedWindow::new_connection(){
     main_gui->connectFrame();
 }
+
+
+ 
 void MainWindow::helpBox(){
     QMessageBox *msgBox  = new QMessageBox();
     msgBox->setWindowTitle("Help");
@@ -101,3 +105,4 @@ void MainWindow::aboutBox(){
     msgBox->setText("About");
     msgBox->show();
 }
+

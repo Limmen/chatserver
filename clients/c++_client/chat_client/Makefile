@@ -840,6 +840,12 @@ moc_MainWindow.cpp: /home/kim/qt5/qtbase/include/QtWidgets/QMainWindow \
 		/home/kim/qt5/qtbase/include/QtWidgets/qabstractbutton.h \
 		/home/kim/qt5/qtbase/src/widgets/widgets/qabstractbutton.h \
 		/home/kim/qt5/qtbase/include/QtWidgets/QGridLayout \
+		DisconnectedWindow.h \
+		/home/kim/qt5/qtbase/include/QtWidgets/QAction \
+		/home/kim/qt5/qtbase/include/QtWidgets/qaction.h \
+		/home/kim/qt5/qtbase/src/widgets/kernel/qaction.h \
+		/home/kim/qt5/qtbase/include/QtWidgets/qactiongroup.h \
+		/home/kim/qt5/qtbase/src/widgets/kernel/qactiongroup.h \
 		MainWindow.h
 	/home/kim/qt5/qtbase/bin/moc $(DEFINES) -I/home/kim/qt5/qtbase/mkspecs/linux-g++ -I/home/kim/workspace/erlangprojects/chat/clients/c++_client/chat_client -I/home/kim/workspace/erlangprojects/chat/clients/c++_client/chat_client -I/home/kim/qt5/qtbase/include -I/home/kim/qt5/qtbase/include/QtWidgets -I/home/kim/qt5/qtbase/include/QtGui -I/home/kim/qt5/qtbase/include/QtNetwork -I/home/kim/qt5/qtbase/include/QtCore -I/usr/include/c++/4.8 -I/usr/include/x86_64-linux-gnu/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include MainWindow.h -o moc_MainWindow.cpp
 
@@ -2080,6 +2086,12 @@ main.o: main.cpp MainWindow.h \
 		/home/kim/qt5/qtbase/include/QtWidgets/qabstractbutton.h \
 		/home/kim/qt5/qtbase/src/widgets/widgets/qabstractbutton.h \
 		/home/kim/qt5/qtbase/include/QtWidgets/QGridLayout \
+		DisconnectedWindow.h \
+		/home/kim/qt5/qtbase/include/QtWidgets/QAction \
+		/home/kim/qt5/qtbase/include/QtWidgets/qaction.h \
+		/home/kim/qt5/qtbase/src/widgets/kernel/qaction.h \
+		/home/kim/qt5/qtbase/include/QtWidgets/qactiongroup.h \
+		/home/kim/qt5/qtbase/src/widgets/kernel/qactiongroup.h \
 		/home/kim/qt5/qtbase/include/QtWidgets/QApplication \
 		/home/kim/qt5/qtbase/include/QtWidgets/qapplication.h \
 		/home/kim/qt5/qtbase/src/widgets/kernel/qapplication.h \
@@ -2352,18 +2364,19 @@ MainWindow.o: MainWindow.cpp MainWindow.h \
 		/home/kim/qt5/qtbase/include/QtWidgets/qabstractbutton.h \
 		/home/kim/qt5/qtbase/src/widgets/widgets/qabstractbutton.h \
 		/home/kim/qt5/qtbase/include/QtWidgets/QGridLayout \
-		/home/kim/qt5/qtbase/include/QtWidgets/QSizePolicy \
-		/home/kim/qt5/qtbase/include/QtWidgets/QMenu \
-		/home/kim/qt5/qtbase/include/QtWidgets/qmenu.h \
-		/home/kim/qt5/qtbase/src/widgets/widgets/qmenu.h \
+		DisconnectedWindow.h \
+		/home/kim/qt5/qtbase/include/QtWidgets/QAction \
 		/home/kim/qt5/qtbase/include/QtWidgets/qaction.h \
 		/home/kim/qt5/qtbase/src/widgets/kernel/qaction.h \
 		/home/kim/qt5/qtbase/include/QtWidgets/qactiongroup.h \
 		/home/kim/qt5/qtbase/src/widgets/kernel/qactiongroup.h \
+		/home/kim/qt5/qtbase/include/QtWidgets/QSizePolicy \
+		/home/kim/qt5/qtbase/include/QtWidgets/QMenu \
+		/home/kim/qt5/qtbase/include/QtWidgets/qmenu.h \
+		/home/kim/qt5/qtbase/src/widgets/widgets/qmenu.h \
 		/home/kim/qt5/qtbase/include/QtWidgets/QMenuBar \
 		/home/kim/qt5/qtbase/include/QtWidgets/qmenubar.h \
 		/home/kim/qt5/qtbase/src/widgets/widgets/qmenubar.h \
-		/home/kim/qt5/qtbase/include/QtWidgets/QAction \
 		/home/kim/qt5/qtbase/include/QtCore/QTime \
 		/home/kim/qt5/qtbase/include/QtCore/qdatetime.h \
 		/home/kim/qt5/qtbase/src/corelib/tools/qdatetime.h \
@@ -2372,7 +2385,12 @@ MainWindow.o: MainWindow.cpp MainWindow.h \
 		/home/kim/qt5/qtbase/src/corelib/kernel/qeventloop.h \
 		/home/kim/qt5/qtbase/include/QtCore/QCoreApplication \
 		/home/kim/qt5/qtbase/include/QtCore/qcoreapplication.h \
-		/home/kim/qt5/qtbase/src/corelib/kernel/qcoreapplication.h
+		/home/kim/qt5/qtbase/src/corelib/kernel/qcoreapplication.h \
+		/home/kim/qt5/qtbase/include/QtWidgets/QMessageBox \
+		/home/kim/qt5/qtbase/include/QtWidgets/qmessagebox.h \
+		/home/kim/qt5/qtbase/src/widgets/dialogs/qmessagebox.h \
+		/home/kim/qt5/qtbase/include/QtWidgets/qdialog.h \
+		/home/kim/qt5/qtbase/src/widgets/dialogs/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MainWindow.o MainWindow.cpp
 
 ChatWindow.o: ChatWindow.cpp /home/kim/qt5/qtbase/include/QtWidgets/QLabel \
