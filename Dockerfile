@@ -13,9 +13,9 @@ RUN cd rebar3; ./bootstrap; cp rebar3 /bin/rebar3;
 
 RUN echo "export PATH=$PATH:/bin/rebar3" >> ~/.bashrc
 
-RUN git clone https://github.com/Limmen/chatserver.git
+COPY . .
 
 EXPOSE 2000
 
-CMD cd chatserver; make; make run_server
+CMD make run_server
 
