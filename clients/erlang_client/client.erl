@@ -22,5 +22,3 @@ recv(ServerSocket) ->
         {error, closed} ->
             ok
     end.
-
-        
